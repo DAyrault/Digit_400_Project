@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+            <title>Digit 400</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Link to Bootstrap CSS -->
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <!-- Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Favicon Link -->
+        <link href="{{ url_for('static', filename='images/favicon.ico') }}" rel="shortcut icon">
+        
+        <script>
+            //Model Initializer
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')
+            })
+        </script>
+        
+    </head>
+
+    <body>
+        <header>
+            <!--Nav-->
+            <ol class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">
+                        <img title="Home" alt="Site Logo" style="max-width: 120px; margin-top: -17px;" id="mainlogo" src="{{ url_for('static', filename='images/mainlogo.png') }}">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    
+                    <a class="nav-item" href="/about/" title="About">About
+                    <i class="material-icons">pets</i>
+                    </a>
+                </li>
+                
+                {% if session.logged_in %}
+                <li class="nav-item">
+                    
+                    <a class="nav-link" href="/dashboard/" title="Dashboard">Dashboard
+                    <i class="material-icons">track_changes</i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    
+                    <a class="nav-item" href="/logout/" title="Logout">Logout
+                    <i class="material-icons">eject</i>
+                    </a>
+                </li>
+                {% else %}
+                
+                
+                <li class="nav-item">
+                    
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" title="Login/Register">Login/Register
+                    <i class="material-icons">invert_colors</i>
+                    </a>
+                </li>
+                
+                {% endif %}
+            </ol>
+            <!--END NAV-->
+            
+            <!-- Login/Register Model -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <!--Login Form-->
+                        <div class="container-fluid">
+                            <form action="" class="form-inline" method="post">
+                                <input style="margin-right: 2%" type="text" class="form-control" placeholder="Username" name="username" value="">
+                                <input type="password" class="form-control" placeholder="Password" name="password" value="">
+                                
+                                <input style="margin-top: 2%" class="btn btn-primary" type="button" value="Login">
+                                
+                                <div class="container-fluid">
+                                    <br>&nbsp;
+                                        <p>No Account? <a href="#">Register Here</a></p>
+                                </div>
+                                
+                            </form>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <!--End Login Model-->
+            
+        </header>
+        <div class="container-fluid" style="min-height: 100%; width: 85%">
+        
+            {% with messages = get_flashed_messages() %}
+            
+                {% if messages %}
+            
+                    {% for message in messages %}
+                        
+                        <div class="alert alert-info" role="alert">
+                            
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true"><i class="material-icons">close</i></span></button>
+                            
+                            {{message}}
+                        
+                        </div>
+            
+                    {% endfor %}
+            
+                {% endif %}
+            
+            {% endwith %}
+            
+            {% block body %}
+            
+            {% endblock %}
+            
+        </div>
+        
+        
+        <!--Bootstrap Dependencies and JS Libraries-->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+</html>
