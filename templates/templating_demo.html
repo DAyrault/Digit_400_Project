@@ -1,0 +1,54 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+<h2>Basic for Loop</h2>
+
+    {% for o in output %}
+        <p>{{o}}</p>
+    {% endfor %}
+
+<hr>
+
+<h2>if statement</h2>
+
+    {% if output[4]|int > 10 %}
+        <p>42 is greater than 10</p>
+    {% endif %}
+<hr>
+
+<h2>.replace() method</h2>
+
+<p>{{ output [0]|replace("good", "AMAZING!!") }}</p>
+
+<hr>
+
+<h2>loop through string with .split()</h2>
+
+<ul>
+
+    {% for lang in output[1].split(",") %}
+        <li>{{lang}}</li>
+    {% endfor %}
+
+</ul>
+
+<hr>
+
+<h2>Render html with |safe</h2>
+
+{{output[2]|safe}}
+
+<hr>
+
+<h2>{% raw %}</h2>
+
+{% raw %}
+<pre>
+    {% for i in items %}
+        {{item}}
+    {% endfor %}
+</pre>
+{% endraw %}
+
+{% endblock %}

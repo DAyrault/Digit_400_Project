@@ -20,6 +20,16 @@
             })
         </script>
         
+         <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116496171-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-116496171-1');
+        </script>
+        
     </head>
 
     <body>
@@ -28,7 +38,7 @@
             <ol class="nav justify-content-end">
                 <li class="nav-item">
                     <a class="nav-link active" href="/">
-                        <img title="Home" alt="Site Logo" style="max-width: 120px; margin-top: -17px;" id="mainlogo" src="{{ url_for('static', filename='images/mainlogo.png') }}">
+                        <img title="Home" alt="Site Logo" style="max-width: 150px; margin-top: -17px;" id="mainlogo" src="{{ url_for('static', filename='images/mainlogo.png') }}">
                     </a>
                 </li>
                 <li class="nav-item">

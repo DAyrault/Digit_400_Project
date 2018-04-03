@@ -1,5 +1,6 @@
-from flask import Flask, render_template, flash, url_for, redirect, request, session
+from flask import Flask, render_template, flash, url_for, redirect, request, session, make_response
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
+from datetime import datetime, timedelta
 from passlib.hash import sha256_crypt
 from MySQLdb import escape_string as thwart
 import gc
@@ -59,6 +60,17 @@ def dashboard():
         return render_template("dashboard.html", APP_CONTENT = APP_CONTENT)
     except Exception as e:
         return render_template("500.html", error = e)
+    
+@app.route("/introduction-to-app/")
+@login_required
+def templating():
+    try:
+        output = ["Digit 400 is good", "Python, Java, php, SQL, C++", "<p><strong>Hello World!</strong></p>", 42, "42"]
+        
+        return render_template("templating_demo.html", output = output)
+        
+    except Exception as e:
+        return(str(e)) # for debugging porpuses only
     
 @app.route("/login/", methods=["GET", "POST"])
 def login():
@@ -147,6 +159,33 @@ def register_page():
         #return("Connected")
     except Exception as e:
         return(str(e)) # This is for debugging purposes only
+    
+@app.route("/sitemap.xml/",methods=["GET"])
+def sitemap():
+    try:
+        pages = []
+        week = (datetime.now() - timedelta(days = 7)).date().isoformat()
+        
+        for rule in app.url_map.iter_rules():
+            if "GET" in rule.methods and len(rule.arguments) == 0:
+                pages.append(
+                    ["http://104.131.107.47/"+str(rule.rule),week]
+                )
+                
+        sitemap_xml = render_template("sitemap_template.xml", pages = pages)
+        
+        response = make_response(sitemap_xml)
+        
+        response.headers["Content-Type"] = "application/xml"
+        
+        return response
+        
+    except Exception as e:
+        return (str(e)) #For debugging purposes only.
+    
+@app.route("/robots.txt/")
+def robots():
+    return("User-agent:*\nDisallow: /register/\nDisallow: /login") #Disallows some robot traffic
     
 @app.errorhandler(404)
 def page_not_found(e):
