@@ -1,3 +1,10 @@
+/*Google Font Mix-ins*/
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Stylish');
+</style>
+
+/*Nav Bar Spacing for Logo*/
 # mainlogo{
     max-width: :120px;
     margin-top: -7px;
@@ -5,4 +12,25 @@
 
 .button_space {
     margin-top: 2%;
+}
+
+/*Basic Font Styles*/
+p {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+h1 {
+    font-family: 'Stylish', sans-serif;
+}
+.nav-link {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color:deepskyblue
+}
+
+body{
+    background: url(../images/11-7-2.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

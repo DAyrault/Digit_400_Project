@@ -1,16 +1,25 @@
-from flask import Flask, render_template, flash, url_for, redirect, request, session, make_response
+from flask import Flask, render_template, flash, url_for, redirect, request, session, make_response, send_file, send_from_directory
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
+from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 from passlib.hash import sha256_crypt
 from MySQLdb import escape_string as thwart
+import os
 import gc
 from functools import wraps
 from content_management import Content
 from db_connect import connection
 
 APP_CONTENT = Content()
+UPLOAD_FOLDER = '/var/www/FlaskApp/FlaskApp/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-app = Flask(__name__)
+app = Flask(__name__, instance_path='/var/www/FlaskApp/FlaskApp/uploads')
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def login_required(f):
     @wraps(f)
@@ -159,6 +168,57 @@ def register_page():
         #return("Connected")
     except Exception as e:
         return(str(e)) # This is for debugging purposes only
+    
+@app.route('/uploads/', methods=['GET', 'POST'])
+@login_required
+def upload_file():
+    try:
+        if request.method == 'POST':
+            # check if the post request has the file part
+            if 'file' not in request.files:
+                flash('No file part')
+                return redirect(request.url)
+            file = request.files['file']
+            # if user does not select file, browser also
+            # submit a empty part without filename
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File upload successful')
+                return render_template('uploads.html', filename = filename)
+        return render_template('uploads.html')
+    except:
+        flash("Please upload a valid file")
+        return render_template('uploads.html')
+        #return str(e)
+    
+@app.route("/download/")
+@login_required
+def download():
+    try:
+        return send_file('/var/www/FlaskApp/FlaskApp/uploads/11-7-1.jpg', attachment_filename = "puppies.jpg")
+    except Exception as e:
+        return str(e)
+    
+@app.route("/downloader/", methods=["GET", "POST"])
+@login_required
+def downloader():
+    error = ""
+    try:
+        if request.method =="POST":
+            filename = request.form['filename']
+            return send_file('/var/www/FlaskApp/FlaskApp/uploads/' + filename, attachment_filename='download')
+        
+        else:
+            return render_template('downloader.html', error = error)
+        error = "Please enter valid file name"
+        return render_template('downloader.html', error = error)
+        
+    except Exception as e:
+        return str(e)
     
 @app.route("/sitemap.xml/",methods=["GET"])
 def sitemap():
