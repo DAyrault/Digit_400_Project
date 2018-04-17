@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, url_for, redirect, request, session, make_response, send_file, send_from_directory
+from flask import Flask, render_template, flash, url_for, redirect, request, session, make_response, send_file, send_from_directory, jsonify
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
@@ -219,6 +219,24 @@ def downloader():
         
     except Exception as e:
         return str(e)
+    
+@app.route("/background_process/", methods=["GET","POST"])
+@login_required
+def background_process():
+    try:
+        lang = request.args.get("proglang", 0, type=str)
+        if lang.lower() == 'python':
+            return jsonify(result="You are wise.")
+        else:
+            return jsonify(result="Try again.")
+        
+    except Exception as e:
+        return(str(e))
+    
+@app.route("/jsonify/", methods=["GET","POST"])
+@login_required
+def json_stuff():
+    return render_template("jsonify.html")
     
 @app.route("/sitemap.xml/",methods=["GET"])
 def sitemap():
