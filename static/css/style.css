@@ -1,8 +1,6 @@
 /*Google Font Mix-ins*/
 
-<style>
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Stylish');
-</style>
 
 /*Nav Bar Spacing for Logo*/
 # mainlogo{
@@ -22,11 +20,15 @@ p {
 h1 {
     font-family: 'Stylish', sans-serif;
 }
-.nav-link {
+a .nav-item {
     font-family: 'IBM Plex Sans', sans-serif;
-    color:deepskyblue
+    color:deepskyblue;
+}
+body{
+    background-color:azure;
 }
 
+/*
 body{
     background: url(../images/11-7-2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -34,3 +36,4 @@ body{
     -o-background-size: cover;
     background-size: cover;
 }
+*/

@@ -122,11 +122,33 @@
             
         </div>
         
-        <a href="#">
-            <video loop controls muted="muted" autoplay="autoplay" poster="/static/images/Car.wmv" style="width: 100%; max-height: 80%">
-                <source src="#">
-            </video>
-        </a>
+        <div class="container-fluid" style="min-height: 100%; width: 85%">
+        
+            {% with messages = get_flashed_messages() %}
+            
+                {% if messages %}
+            
+                    {% for message in messages %}
+                        
+                        <div class="alert alert-info" role="alert">
+                            
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true"><i class="material-icons">close</i></span></button>
+                            
+                            {{message}}
+                        
+                        </div>
+            
+                    {% endfor %}
+            
+                {% endif %}
+            
+            {% endwith %}
+            
+            {% block body %}
+            
+            {% endblock %}
+            
+        </div>
         
         <!--Bootstrap Dependencies and JS Libraries-->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -5,16 +5,16 @@
 <!-- Nav tabs -->
     <ul style="margin-bottom: 2%" class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Your Cart</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Checkout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Preferences</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
       </li>
     </ul>
 
@@ -24,13 +24,50 @@
           
             <div class="card">
                 <div class="card-header">
-                    Home
+                    Your Cart
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">View your cart and your current total, or, add an item here!</p>
                     
                         {% for i in APP_CONTENT["Home"] %}
+                    
+                            <a href="{{i[1]}}" class="btn btn-primary" class="button_space" style="margin-top: 2%">{{i[0]}}</a>
+                    
+                        {% endfor %}
+                    
+                </div>
+            </div>
+        
+        </div>
+      <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+        
+            <div class="card">
+                <div class="card-header">
+                    Checkout
+                </div>
+                <div class="card-body">
+                    <p class="card-text">When you are ready to see your overview, click here!</p>
+                    
+                        {% for i in APP_CONTENT["Messages"] %}
+                    
+                            <a href="{{i[1]}}" class="btn btn-primary" class="button_space" style="margin-top: 2%">{{i[0]}}</a>
+                    
+                        {% endfor %}
+                    
+                </div>
+            </div>
+        
+        </div>
+      <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        
+            <div class="card">
+                <div class="card-header">
+                    Preferences
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Change the cart preferences, such as price range, here!</p>
+                    
+                        {% for i in APP_CONTENT["Settings"] %}
                     
                             <a href="{{i[1]}}" class="btn btn-primary" class="button_space" style="margin-top: 2%">{{i[0]}}</a>
                     
@@ -47,8 +84,7 @@
                     Profile
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">View your Profile, View the Terms of Service, or Delete your Accout, here!</p>
                     
                         {% for i in APP_CONTENT["Profile"] %}
                     
@@ -59,46 +95,6 @@
                 </div>
             </div>
           
-        </div>
-      <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-        
-            <div class="card">
-                <div class="card-header">
-                    Messages
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    
-                        {% for i in APP_CONTENT["Messages"] %}
-                    
-                            <a href="{{i[1]}}" class="btn btn-primary" class="button_space" style="margin-top: 2%">{{i[0]}}</a>
-                    
-                        {% endfor %}
-                    
-                </div>
-            </div>
-        
-        </div>
-      <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-        
-            <div class="card">
-                <div class="card-header">
-                    Settings
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    
-                        {% for i in APP_CONTENT["Settings"] %}
-                    
-                            <a href="{{i[1]}}" class="btn btn-primary" class="button_space" style="margin-top: 2%">{{i[0]}}</a>
-                    
-                        {% endfor %}
-                    
-                </div>
-            </div>
-        
         </div>
     </div>
 
