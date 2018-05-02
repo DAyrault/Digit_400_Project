@@ -3,7 +3,7 @@ def Content():
         "Home":[["Add Item","/additem/"], 
                 ["View Cart", "/viewcart/"]],
         "Messages":[["Checkout","/checkout/"]],
-        "Settings":[["Set Cart Preferences","/setpreferences/"]],
+        "Settings":[["Preferences","/preferences/"]],
         "Profile":[["User Profile","/profile/"],
                    ["Terms of Service","/tos/"],
                    ["Delete Account","/deleteaccount/"]]

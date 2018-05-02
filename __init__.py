@@ -70,6 +70,62 @@ def dashboard():
     except Exception as e:
         return render_template("500.html", error = e)
     
+@app.route("/about/")
+def about():
+    try:
+        return render_template("about.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+
+@app.route("/tos/")
+def tos():
+    try:
+        return render_template("tos.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+    
+@app.route("/preferences/", methods=["GET", "POST"])
+def preferences():
+    try:
+        return render_template("preferences.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+    
+@app.route("/additem/")
+def additem():
+    try:
+        return render_template("additem.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+    
+@app.route("/profile/")
+def profile():
+    try:
+        return render_template("profile.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+    
+@app.route("/deleteaccount/")
+def deleteaccount():
+    try:
+        return render_template("deleteaccount.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+    
+@app.route("/checkout/")
+def checkout():
+    try:
+        return render_template("checkout.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+    
+@app.route("/viewcart/")
+def viewcart():
+    try:
+        return render_template("viewcart.html", APP_CONTENT = APP_CONTENT)
+    except Exception as e:
+        return render_template("500.html", error = e)
+    
 @app.route("/introduction-to-app/")
 @login_required
 def templating():
@@ -264,7 +320,7 @@ def sitemap():
 @app.route("/robots.txt/")
 def robots():
     return("User-agent:*\nDisallow: /register/\nDisallow: /login") #Disallows some robot traffic
-    
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html")
