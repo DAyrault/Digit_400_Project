@@ -91,7 +91,7 @@ def preferences():
     except Exception as e:
         return render_template("500.html", error = e)
     
-@app.route("/additem/")
+@app.route("/additem/", methods=["GET", "POST"])
 def additem():
     try:
         return render_template("additem.html", APP_CONTENT = APP_CONTENT)
